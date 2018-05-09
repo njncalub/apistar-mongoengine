@@ -40,6 +40,7 @@ install_requires = [
 tests_require = [
     'pytest>=3.5.1',
     'flake8>=3.5.0',
+    'tox>=3.0.0',
 ]
 setup_requires = [
     'pytest-runner',
