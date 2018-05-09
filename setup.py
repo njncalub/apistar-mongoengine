@@ -12,8 +12,8 @@ def get_version(package):
     return '.'.join(map(str, ver_tuple))
 
 
-def get_long_description(package):
-    with open('README.md') as file:
+def get_long_description():
+    with open('README.rst') as file:
         long_description = file.read()
     
     return long_description.strip()
@@ -52,7 +52,7 @@ options = {
     'version': get_version('apistar_mongoengine'),
     'url': 'http://github.com/njncalub/apistar-mongoengine',
     'description': description,
-    'long_description': get_long_description('apistar_mongoengine'),
+    'long_description': get_long_description(),
     'author': 'Nap Joseph Calub',
     'author_email': 'njncalub+apistar_mongoengine@gmail.com',
     'license': 'MIT',
