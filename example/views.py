@@ -2,8 +2,8 @@ from typing import List
 
 from apistar import http
 
-from .models import PostModel
-from .types import PostType
+from models import PostModel
+from types import PostType
 
 
 def create_post(post: PostType) -> http.JSONResponse:

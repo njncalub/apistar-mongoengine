@@ -21,7 +21,7 @@ Installation
 Getting Started
 ---------------
 
-Add ``apistar_mongoengine.components.MongoClientComponent`` to your app's components.
+Add ``MongoClientComponent`` to your app's components.
 
 ::
 

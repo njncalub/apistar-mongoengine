@@ -9,9 +9,9 @@ sys.path.insert(0, path)
 
 from apistar import App
 
-from .routes import routes
-from .components import components
-from .event_hooks import event_hooks
+from routes import routes
+from components import components
+from event_hooks import event_hooks
 
 
 app = App(routes=routes,

@@ -1,6 +1,6 @@
 from apistar import Route
 
-from .views import create_post, get_post, list_posts
+from views import create_post, get_post, list_posts
 
 
 routes = [
