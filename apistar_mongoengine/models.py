@@ -66,6 +66,9 @@ class Document(mongoengine.Document):
         total = total or count or len(getattr(self, field_name))
         return ListFieldPagination(self.__class__.objects, self.pk, field_name,
                                    page, per_page, total=total)
+    
+    def serialize(self):
+        return {}
 
 
 class DynamicDocument(mongoengine.DynamicDocument):
