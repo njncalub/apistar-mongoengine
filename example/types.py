@@ -1,5 +1,6 @@
-from apistar import types, validators
+from apistar import validators
+from apistar_mongoengine.types import Type
 
 
-class PostType(types.Type):
+class PostType(Type):
     message = validators.String()
