@@ -18,6 +18,30 @@ Installation
 
     $ pip install apistar-mongoengine
 
+Getting Started
+---------------
+
+Add ``apistar_mongoengine.components.MongoClientComponent`` to your app's components.
+
+::
+
+    from apistar import App
+    from apistar_mongoengine.components import MongoClientComponent
+    
+    routes = [
+        # add your routes
+    ]
+    components = [
+        MongoClientComponent(host='mongodb://localhost:27017/sample'),
+    ]
+    
+    app = App(routes=routes, components=components)
+    
+    if __name__ == '__main__':
+        app.serve(host='127.0.0.1', port=5000, debug=True)
+
+Check the `example app <https://github.com/njncalub/apistar-mongoengine/tree/master/example>`_ for more details.
+
 Contributing
 ------------
 
