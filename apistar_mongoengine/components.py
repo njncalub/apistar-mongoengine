@@ -4,8 +4,6 @@ from mongoengine.python_support import IS_PYMONGO_3
 from pymongo import MongoClient, ReadPreference
 
 
-DEFAULT_CONNECTION_NAME = 'default'
-
 if IS_PYMONGO_3:
     READ_PREFERENCE = ReadPreference.PRIMARY
 else:
@@ -22,15 +20,11 @@ class MongoClientComponent(Component):
         """
         
         options = {
-            'alias': DEFAULT_CONNECTION_NAME,
+            'alias': me_connection.DEFAULT_CONNECTION_NAME,
         }
         options.update(kwargs)
         
         self.register_connection(**options)
-        
-        # save and use alias
-        self._alias = options['alias']
-        return self.get_connection(alias=self._alias)
     
     def resolve(self) -> MongoClient:
         return self.get_connection()
