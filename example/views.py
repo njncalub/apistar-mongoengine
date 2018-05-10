@@ -1,3 +1,5 @@
+from typing import List
+
 from apistar import http
 
 from .models import PostModel
