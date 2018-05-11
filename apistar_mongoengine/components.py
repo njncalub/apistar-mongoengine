@@ -70,3 +70,7 @@ class MongoClientComponent(Component):
         """
         
         me_connection.get_connection(**kwargs)
+
+
+class PaginationComponent(Component):
+    pass
