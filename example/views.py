@@ -22,5 +22,5 @@ def get_post(post_id: str) -> PostType:
 def list_posts() -> List[PostType]:
     return [
         PostType(post)
-        for post in session.query(PostModel).all()
+        for post in PostModel.objects.all()
     ]

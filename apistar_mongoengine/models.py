@@ -2,10 +2,12 @@ import mongoengine
 from apistar import exceptions
 from mongoengine.errors import ValidationError
 from mongoengine.queryset import (
-    DoesNotExist, MultipleObjectsReturned, QuerySet,
+    DoesNotExist,
+    MultipleObjectsReturned,
+    QuerySet,
 )
 
-from .pagination import ListFieldPagination
+from .pagination import ListFieldPagination, Pagination
 
 
 class BaseQuerySet(QuerySet):
@@ -66,9 +68,6 @@ class Document(mongoengine.Document):
         total = total or count or len(getattr(self, field_name))
         return ListFieldPagination(self.__class__.objects, self.pk, field_name,
                                    page, per_page, total=total)
-    
-    def serialize(self):
-        return {}
 
 
 class DynamicDocument(mongoengine.DynamicDocument):
