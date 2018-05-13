@@ -7,7 +7,7 @@ from mongoengine.queryset import (
     QuerySet,
 )
 
-from .pagination import ListFieldPagination, Pagination
+from apistar_mongoengine.pagination import ListFieldPagination, Pagination
 
 
 class BaseQuerySet(QuerySet):

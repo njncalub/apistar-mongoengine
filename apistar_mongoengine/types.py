@@ -8,7 +8,7 @@ from typing import (
     Union,
 )
 
-from apistar import types
+from apistar import types as apistar_types
 
 
 PageLimit = NewType('PageLimit', int)
@@ -79,5 +79,5 @@ class Paginated(StrObjMapping):
         return 'Paginated({})'.format(repr(self._list))
 
 
-class Type(types.Type):
+class Type(apistar_types.Type):
     pass
