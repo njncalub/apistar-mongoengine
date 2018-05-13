@@ -1,5 +1,6 @@
 import mongoengine
 from apistar import exceptions
+from apistar_mongoengine import types as as_me_types
 from mongoengine.errors import ValidationError
 from mongoengine.queryset import (
     DoesNotExist,
@@ -84,3 +85,7 @@ class EmbeddedDocument(mongoengine.EmbeddedDocument):
     """
     
     meta = {'abstract': True, 'queryset_class': BaseQuerySet}
+
+
+class DocumentType(as_me_types.Type):
+    pass
