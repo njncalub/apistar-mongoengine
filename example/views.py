@@ -3,7 +3,7 @@ from typing import List
 from apistar import http
 
 from models import PostModel
-from types import PostType
+from types_ import PostType  # because types is part of the standard library
 
 
 def create_post(post: PostType) -> http.JSONResponse:
