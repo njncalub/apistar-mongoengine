@@ -1,23 +1,16 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [packages]
-
 mongoengine = "*"
 apistar = "*"
 
-
 [dev-packages]
-
 pytest = "*"
 "flake8" = "*"
 tox = "*"
 
-
 [requires]
-
 python_version = "3.6"
