@@ -8,14 +8,14 @@ def get_version(package):
     with open(os.path.join(package, '__init__.py')) as file:
         ver_line = list(filter(lambda l: l.startswith('VERSION'), file))[0]
         ver_tuple = eval(ver_line.split('=')[-1])
-    
+
     return '.'.join(map(str, ver_tuple))
 
 
 def get_long_description():
     with open('README.rst') as file:
         long_description = file.read()
-    
+
     return long_description.strip()
 
 

@@ -11,32 +11,32 @@ class Pagination(object):
     def __init__(self, iterable, page, per_page):
         if page < 1:
             raise exceptions.NotFound()
-        
+
         self.iterable = iterable
         self.page = page
         self.per_page = per_page
-        
+
         if isinstance(iterable, QuerySet):
             self.total = iterable.count()
         else:
             self.total = len(iterable)
-        
+
         start_index = (page - 1) * per_page
         end_index = page * per_page
-        
+
         self.items = iterable[start_index:end_index]
         if isinstance(self.items, QuerySet):
             self.items = self.items.select_related()
         if not self.items and page != 1:
             raise exceptions.NotFound()
-    
+
     @property
     def pages(self):
         """
         The total number of pages.
         """
         return int(math.ceil(self.total / float(self.per_page)))
-    
+
     def prev(self, error_out=False):
         """
         Returns a :class:`Pagination` object for the previous page.
@@ -48,21 +48,21 @@ class Pagination(object):
             iterable._skip = None
             iterable._limit = None
         return self.__class__(iterable, self.page - 1, self.per_page)
-    
+
     @property
     def prev_num(self):
         """
         Number of the previous page.
         """
         return self.page - 1
-    
+
     @property
     def has_prev(self):
         """
         True if a previous page exists.
         """
         return self.page > 1
-    
+
     def next(self, error_out=False):
         """
         Returns a :class:`Pagination` object for the next page.
@@ -74,21 +74,21 @@ class Pagination(object):
             iterable._skip = None
             iterable._limit = None
         return self.__class__(iterable, self.page + 1, self.per_page)
-    
+
     @property
     def has_next(self):
         """
         True if a next page exists.
         """
         return self.page < self.pages
-    
+
     @property
     def next_num(self):
         """
         Number of the next page.
         """
         return self.page + 1
-    
+
     def iter_pages(self, left_edge=2, left_current=2,
                    right_current=5, right_edge=2):
         """
@@ -143,26 +143,26 @@ class ListFieldPagination(Pagination):
         """
         if page < 1:
             raise exceptions.NotFound()
-        
+
         self.page = page
         self.per_page = per_page
-        
+
         self.queryset = queryset
         self.doc_id = doc_id
         self.field_name = field_name
-        
+
         start_index = (page - 1) * per_page
-        
+
         field_attrs = {field_name: {"$slice": [start_index, per_page]}}
-        
+
         qs = queryset(pk=doc_id)
         self.items = getattr(qs.fields(**field_attrs).first(), field_name)
         self.total = total or len(getattr(qs.fields(**{field_name: 1}).first(),
                                           field_name))
-        
+
         if not self.items and page != 1:
             raise exceptions.NotFound()
-    
+
     def prev(self, error_out=False):
         """
         Returns a :class:`Pagination` object for the previous page.
@@ -171,7 +171,7 @@ class ListFieldPagination(Pagination):
                                         'for this method to work')
         return self.__class__(self.queryset, self.doc_id, self.field_name,
                               self.page - 1, self.per_page, self.total)
-    
+
     def next(self, error_out=False):
         """
         Returns a :class:`Pagination` object for the next page.

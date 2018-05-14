@@ -15,24 +15,24 @@ class MongoClientComponent(Component):
     def __init__(self, **kwargs) -> None:
         """
         Configure a new database backend.
-        
+
         View self.register_connection() for valid parameters.
         """
-        
+
         options = {
             'alias': me_connection.DEFAULT_CONNECTION_NAME,
         }
         options.update(kwargs)
-        
+
         self.register_connection(**options)
-    
+
     def resolve(self) -> MongoClient:
         return self.get_connection()
-    
+
     def register_connection(self, **kwargs) -> MongoClient:
         """
         Register a new connection. Taken from mongoengine-0.15.0.
-        
+
         :param alias: the name that will be used to refer to this connection
             throughout MongoEngine
         :param name: the name of the specific database to use
@@ -53,22 +53,22 @@ class MongoClientComponent(Component):
             for example maxpoolsize, tz_aware, etc. See the documentation
             for pymongo's `MongoClient` for a full list.
         """
-        
+
         me_connection.register_connection(**kwargs)
-        
+
         alias = kwargs['alias']
-        
+
         return self.get_connection(alias=alias)
-    
+
     def get_connection(self, **kwargs) -> MongoClient:
         """
         Return a MongoClient connection. Taken from mongoengine-0.15.0.
-        
+
         :param alias: the name that will be used to refer to this connection
             throughout MongoEngine
         :param reconnect: Connect to the database if not already connected
         """
-        
+
         me_connection.get_connection(**kwargs)
 
 

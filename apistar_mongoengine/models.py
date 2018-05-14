@@ -15,7 +15,7 @@ class BaseQuerySet(QuerySet):
     """
     Mongoengine's queryset extended with handy extras.
     """
-    
+
     def get_or_404(self, *args, **kwargs):
         """
         Get a document and raise a 404 Not Found error if it doesn't exist.
@@ -25,7 +25,7 @@ class BaseQuerySet(QuerySet):
         except (MultipleObjectsReturned, DoesNotExist, ValidationError):
             # TODO: probably only DoesNotExist should raise a 404
             raise exceptions.NotFound()
-    
+
     def first_or_404(self):
         """
         Same as get_or_404, but uses .first, not .get.
@@ -33,16 +33,16 @@ class BaseQuerySet(QuerySet):
         obj = self.first()
         if obj is None:
             raise exceptions.NotFound()
-        
+
         return obj
-    
+
     def paginate(self, page, per_page, **kwargs):
         """
         Paginate the QuerySet with a certain number of docs per page and
         return docs for a given page.
         """
         return Pagination(self, page, per_page)
-    
+
     def paginate_field(self, field_name, doc_id, page, per_page, total=None):
         """
         Paginate items within a list field from one document in the QuerySet.
@@ -58,9 +58,9 @@ class Document(mongoengine.Document):
     """
     Abstract Document with extra helpers in the queryset class.
     """
-    
+
     meta = {'abstract': True, 'queryset_class': BaseQuerySet}
-    
+
     def paginate_field(self, field_name, page, per_page, total=None):
         """
         Paginate items within a list field.
@@ -75,7 +75,7 @@ class DynamicDocument(mongoengine.DynamicDocument):
     """
     Abstract Dynamic Document with extra helpers in the queryset class.
     """
-    
+
     meta = {'abstract': True, 'queryset_class': BaseQuerySet}
 
 
@@ -83,7 +83,7 @@ class EmbeddedDocument(mongoengine.EmbeddedDocument):
     """
     Abstract Embedded Document with extra helpers in the queryset class.
     """
-    
+
     meta = {'abstract': True, 'queryset_class': BaseQuerySet}
 
 
