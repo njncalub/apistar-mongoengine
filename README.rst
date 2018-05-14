@@ -27,16 +27,16 @@ For your classes, use ``Document`` and ``DocumentType`` from ``apistar_mongoengi
 
     from apistar_mongoengine.models import Document, DocumentType
     from mongoengine import StringField
-    
-    
+
+
     class ItemModel(Document):
         meta = {
             'collection': 'items',
         }
-        
+
         title = StringField(required=True)
-    
-    
+
+
     class ItemType(DocumentType):
         meta = {
             'model': ItemModel,
@@ -48,34 +48,34 @@ Add ``MongoClientComponent`` to your app's components to initialize the mongodb 
 ::
 
     import typing
-    
+
     from apistar import App, Route
     from apistar_mongoengine.components import MongoClientComponent
-    
+
     from yourapp.models import ItemModel, ItemType
-    
-    
+
+
     def list_items() -> typing.List[ItemType]:
         return [
             ItemType(item)
             for item in ItemModel.objects.all()
         ]
-    
+
     routes = [
         Route(url='/items/', method='GET', handler=list_items),
     ]
-    
+
     components = [
         MongoClientComponent(host='mongodb://localhost:27017/sample'),
     ]
-    
+
     app = App(routes=routes, components=components)
-    
-    
+
+
     if __name__ == '__main__':
         app.serve(host='127.0.0.1', port=5000, debug=True)
 
-Check the `example app <https://github.com/njncalub/apistar-mongoengine/tree/master/example>`_ for more details.
+Check the `example <https://github.com/njncalub/apistar-mongoengine/tree/master/example>`_ for more details.
 
 Contributing
 ------------
