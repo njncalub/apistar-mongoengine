@@ -4,7 +4,6 @@ from typing import (
     NewType,
     Sequence,
     Tuple,
-    TypeVar,
     Union,
 )
 

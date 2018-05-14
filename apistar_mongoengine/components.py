@@ -1,13 +1,13 @@
 from apistar import Component
 from mongoengine import connection as me_connection
 from mongoengine.python_support import IS_PYMONGO_3
-from pymongo import MongoClient, ReadPreference
+from pymongo import MongoClient
 
 
 if IS_PYMONGO_3:
+    from pymongo import ReadPreference
     READ_PREFERENCE = ReadPreference.PRIMARY
 else:
-    from pymongo import MongoReplicaSetClient
     READ_PREFERENCE = False
 
 
