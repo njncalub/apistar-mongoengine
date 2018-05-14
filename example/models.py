@@ -6,5 +6,5 @@ class PostModel(Document):
     meta = {
         'collection': 'posts',
     }
-    
+
     message = StringField(required=True)
