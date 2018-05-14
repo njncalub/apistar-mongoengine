@@ -14,7 +14,7 @@ from apistar import types as apistar_types
 PageLimit = NewType('PageLimit', int)
 PageOffset = NewType('PageOffset', int)
 PageCount = NewType('PageCount', int)
-PageHistory = NewType('PageHistory', List)
+PageResults = NewType('PageResults', List)
 
 StrPairs = Sequence[Tuple[str, str]]
 StrMapping = Mapping[str, str]
