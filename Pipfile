@@ -11,6 +11,7 @@ apistar = "*"
 pytest = "*"
 "flake8" = "*"
 tox = "*"
+pycodestyle = "*"
 
 [requires]
 python_version = "3.6"
