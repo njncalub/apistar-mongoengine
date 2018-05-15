@@ -1,0 +1,24 @@
+language: python
+
+python:
+  - 'pypy3.5'
+  - '3.5'
+  - '3.6'
+
+env:
+  global:
+    - PIPENV_VENV_IN_PROJECT=1
+    - PIPENV_IGNORE_VIRTUALENVS=1
+
+install:
+  - pip install pipenv
+  - pipenv install --dev
+
+before_script:
+  - pipenv shell -c
+
+script:
+  - pytest --cov apistar_mongoengine
+
+after_success:
+  - coveralls
