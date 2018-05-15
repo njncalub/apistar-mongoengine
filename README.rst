@@ -77,6 +77,20 @@ Add ``MongoClientComponent`` to your app's components to initialize the mongodb 
 
 Check the `example <https://github.com/njncalub/apistar-mongoengine/tree/master/example>`_ for more details.
 
+Running tests and getting the test coverage
+-------------------------------------------
+
+1. Install the required dependencies::
+
+    $ cd <project directory>
+    $ pipenv install
+
+2. Run ``py.test`` with ``coverage`` flags::
+
+    $ pipenv run py.test --cov-report html --cov apistar_mongoengine/ --verbose
+
+3. Open ``./htmlcov/index.html`` in your browser.
+
 Contributing
 ------------
 
