@@ -21,56 +21,38 @@ Installation
 Getting Started
 ---------------
 
-For your classes, use ``Document`` and ``DocumentType`` from ``apistar_mongoengine.models``.
+For your classes, use ``Document`` from ``apistar_mongoengine.models``.
 
 .. code:: python
 
-    from apistar_mongoengine.models import Document, DocumentType
+    from apistar_mongoengine.models import Document
     from mongoengine import StringField
 
-
-    class ItemModel(Document):
-        meta = {
-            'collection': 'items',
-        }
-
+    class TodoItem(Document):
         title = StringField(required=True)
-
-
-    class ItemType(DocumentType):
-        meta = {
-            'model': ItemModel,
-        }
-
 
 Add ``MongoClientComponent`` to your app's components to initialize the mongodb connection.
 
 .. code:: python
 
-    import typing
-
     from apistar import App, Route
     from apistar_mongoengine.components import MongoClientComponent
+    from yourapp.models import TodoItem
 
-    from yourapp.models import ItemModel, ItemType
-
-
-    def list_items() -> typing.List[ItemType]:
+    def list_items():
         return [
-            ItemType(item)
-            for item in ItemModel.objects.all()
+            item.title
+            for item in TodoItem.objects.all()
         ]
-
 
     routes = [
         Route(url='/items/', method='GET', handler=list_items),
     ]
     components = [
-        MongoClientComponent(host='mongodb://localhost:27017/sample'),
+        MongoClientComponent(host='mongodb://localhost:27017/todoapp'),
     ]
 
     app = App(routes=routes, components=components)
-
 
     if __name__ == '__main__':
         app.serve(host='127.0.0.1', port=5000, debug=True)
