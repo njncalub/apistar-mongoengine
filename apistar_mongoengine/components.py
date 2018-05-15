@@ -1,14 +1,7 @@
 from apistar import Component
-from mongoengine import connection as me_connection
+from mongoengine import connection as me_conn
 from mongoengine.python_support import IS_PYMONGO_3
 from pymongo import MongoClient
-
-
-if IS_PYMONGO_3:
-    from pymongo import ReadPreference
-    READ_PREFERENCE = ReadPreference.PRIMARY
-else:
-    READ_PREFERENCE = False
 
 
 class MongoClientComponent(Component):
@@ -16,25 +9,9 @@ class MongoClientComponent(Component):
         """
         Configure a new database backend.
 
-        View self.register_connection() for valid parameters.
-        """
-
-        options = {
-            'alias': me_connection.DEFAULT_CONNECTION_NAME,
-        }
-        options.update(kwargs)
-
-        self.register_connection(**options)
-
-    def resolve(self) -> MongoClient:
-        return self.get_connection()
-
-    def register_connection(self, **kwargs) -> MongoClient:
-        """
-        Register a new connection. Taken from mongoengine-0.15.0.
-
         :param alias: the name that will be used to refer to this connection
             throughout MongoEngine
+        :param db: alias to `name`
         :param name: the name of the specific database to use
         :param host: the host name of the :program:`mongod` instance to
             connect to
@@ -54,22 +31,44 @@ class MongoClientComponent(Component):
             for pymongo's `MongoClient` for a full list.
         """
 
-        me_connection.register_connection(**kwargs)
+        options = {
+            'alias': me_conn.DEFAULT_CONNECTION_NAME,
+            'db': None,
+            'name': None,
+        }
+        options.update(kwargs)
+        self.settings = options.copy()
 
-        alias = kwargs['alias']
+        alias = options.pop('alias')
+        # since me_conn.connect() uses `db` instead of `name`,
+        # we have to remove it here manually.
+        db = options.pop('db')
+        name = options.pop('name')
 
-        return self.get_connection(alias=alias)
+        if not db and name:
+            db = name
 
-    def get_connection(self, **kwargs) -> MongoClient:
+        self.connection = me_conn.connect(db=db, alias=alias, **options)
+
+    def get_connection(self) -> MongoClient:
         """
-        Return a MongoClient connection. Taken from mongoengine-0.15.0.
-
-        :param alias: the name that will be used to refer to this connection
-            throughout MongoEngine
-        :param reconnect: Connect to the database if not already connected
+        Return the current connection.
         """
 
-        me_connection.get_connection(**kwargs)
+        if self.connection:
+            return self.connection
+
+        alias = self.settings.get('alias')
+        self.connection = me_conn.get_connection(alias=alias)
+
+        return self.connection
+
+    def disconnect(self) -> None:
+        alias = self.settings['alias']
+        me_conn.disconnect(alias=alias)
+
+    def resolve(self) -> MongoClient:
+        return self.get_connection()
 
 
 class PaginationComponent(Component):
