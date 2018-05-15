@@ -14,7 +14,7 @@ Shameless bootleg copy of `flask-mongoengine <https://github.com/MongoEngine/fla
 Installation
 ------------
 
-::
+.. code:: bash
 
     $ pip install apistar-mongoengine
 
@@ -23,7 +23,7 @@ Getting Started
 
 For your classes, use ``Document`` and ``DocumentType`` from ``apistar_mongoengine.models``.
 
-::
+.. code:: python
 
     from apistar_mongoengine.models import Document, DocumentType
     from mongoengine import StringField
@@ -45,7 +45,7 @@ For your classes, use ``Document`` and ``DocumentType`` from ``apistar_mongoengi
 
 Add ``MongoClientComponent`` to your app's components to initialize the mongodb connection.
 
-::
+.. code:: python
 
     import typing
 
@@ -61,10 +61,10 @@ Add ``MongoClientComponent`` to your app's components to initialize the mongodb 
             for item in ItemModel.objects.all()
         ]
 
+
     routes = [
         Route(url='/items/', method='GET', handler=list_items),
     ]
-
     components = [
         MongoClientComponent(host='mongodb://localhost:27017/sample'),
     ]
@@ -80,14 +80,18 @@ Check the `example <https://github.com/njncalub/apistar-mongoengine/tree/master/
 Running tests and getting the test coverage
 -------------------------------------------
 
-1. Install the required dependencies::
+1. Install the required dependencies
+
+.. code:: bash
 
     $ cd <project directory>
     $ pipenv install
 
-2. Run ``py.test`` with ``coverage`` flags::
+2. Run ``pytest`` with ``coverage`` flags
 
-    $ pipenv run py.test --cov-report html --cov apistar_mongoengine/ --verbose
+.. code:: bash
+
+    $ pipenv run pytest --cov-report html --cov apistar_mongoengine/ --verbose
 
 3. Open ``./htmlcov/index.html`` in your browser.
 
