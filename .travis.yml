@@ -17,11 +17,8 @@ install:
   - pip install pipenv
   - pipenv install --dev
 
-before_script:
-  - pipenv shell -c
-
 script:
-  - pytest --cov apistar_mongoengine
+  - pipenv run pytest --cov apistar_mongoengine
 
 after_success:
-  - coveralls
+  - pipenv run coveralls
