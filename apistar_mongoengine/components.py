@@ -1,6 +1,5 @@
 from apistar import Component
 from mongoengine import connection as me_conn
-from mongoengine.python_support import IS_PYMONGO_3
 from pymongo import MongoClient
 
 
