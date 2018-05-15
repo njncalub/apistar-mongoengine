@@ -12,6 +12,7 @@ pytest = "*"
 "flake8" = "*"
 tox = "*"
 pycodestyle = "*"
+mongomock = "*"
 
 [requires]
 python_version = "3.6"
