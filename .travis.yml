@@ -15,7 +15,7 @@ services:
 
 install:
   - pip install pipenv
-  - pipenv install --dev
+  - pipenv install --dev -e .
 
 script:
   - pipenv run pytest --cov apistar_mongoengine
