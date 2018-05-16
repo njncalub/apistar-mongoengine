@@ -109,6 +109,14 @@ def test_simple_connect_using_invalid_port(sconn_invalid_port):
         client.admin.command('ismaster')
 
 
+def test_disconnect_client(sconn_params):
+    client1 = sconn_params.resolve()
+    sconn_params.disconnect()
+    client2 = sconn_params.resolve()
+
+    assert client1 is not client2
+
+
 def test_data_persists(sconn_params):
     Todo.drop_collection()
 

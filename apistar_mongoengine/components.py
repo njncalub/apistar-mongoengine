@@ -36,7 +36,7 @@ class MongoClientComponent(Component):
             'name': None,
         }
         options.update(kwargs)
-        self.settings = options.copy()
+        self._settings = options.copy()
 
         alias = options.pop('alias')
         # since me_conn.connect() uses `db` instead of `name`,
@@ -47,24 +47,25 @@ class MongoClientComponent(Component):
         if not db and name:
             db = name
 
-        self.connection = me_conn.connect(db=db, alias=alias, **options)
+        self._connection = me_conn.connect(db=db, alias=alias, **options)
 
     def get_connection(self) -> MongoClient:
         """
         Return the current connection.
         """
 
-        if self.connection:
-            return self.connection
+        if self._connection:
+            return self._connection
 
-        alias = self.settings.get('alias')
-        self.connection = me_conn.get_connection(alias=alias)
+        alias = self._settings.get('alias')
+        self._connection = me_conn.get_connection(alias=alias)
 
-        return self.connection
+        return self._connection
 
     def disconnect(self) -> None:
-        alias = self.settings['alias']
+        alias = self._settings['alias']
         me_conn.disconnect(alias=alias)
+        self._connection = None
 
     def resolve(self) -> MongoClient:
         return self.get_connection()
