@@ -18,13 +18,17 @@ def get_long_description():
     return long_description.strip()
 
 
+version = get_version('apistar_mongoengine')
 description = 'Shameless bootleg copy of flask-mongoengine for API Star.'
+long_description = get_long_description()
 classifiers = [
     'Development Status :: 1 - Planning',
     'Environment :: Web Environment',
     'Intended Audience :: Developers',
     'License :: OSI Approved :: MIT License',
     'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3 :: Only',
+    'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.6',
     'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     'Topic :: Software Development :: Libraries :: Python Modules',
@@ -43,15 +47,15 @@ tests_require = [
 ]
 setup_requires = [
     'pytest-runner',
-],
+]
 
 
 options = {
     'name': 'apistar-mongoengine',
-    'version': get_version('apistar_mongoengine'),
+    'version': version,
     'url': 'http://github.com/njncalub/apistar-mongoengine',
     'description': description,
-    'long_description': get_long_description(),
+    'long_description': long_description,
     'author': 'Nap Joseph Calub',
     'author_email': 'njncalub+apistar_mongoengine@gmail.com',
     'license': 'MIT',
