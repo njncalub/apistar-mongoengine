@@ -41,7 +41,11 @@ install_requires = [
     'apistar>=0.5.12',
 ]
 tests_require = [
+    'coverage>=4.5.1',
+    'mongomock>=3.10.0',
     'pytest>=3.5.1',
+    'pytest-cov>=2.5.1',
+    'pytest-flake8>=1.0.1',
     'flake8>=3.5.0',
     'tox>=3.0.0',
 ]
