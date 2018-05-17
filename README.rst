@@ -6,7 +6,7 @@ apistar-mongoengine
 .. |development status| image:: https://img.shields.io/badge/development%20status-planning-lightgrey.svg
    :target: https://github.com/njncalub/apistar-mongoengine/issues
 
-.. |pypi version| image:: https://img.shields.io/badge/version-0.0.5-blue.svg
+.. |pypi version| image:: https://img.shields.io/badge/version-0.0.6-blue.svg
    :target: https://pypi.org/project/apistar-mongoengine
 
 .. |build status| image:: https://travis-ci.org/njncalub/apistar-mongoengine.svg?branch=master
