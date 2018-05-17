@@ -3,18 +3,17 @@ apistar-mongoengine
 
 |development status| |pypi version| |build status| |coverage|
 
-.. |development status| image:: https://img.shields.io/badge/development%20status-planning-lightgrey.svg
+.. |development status| image:: https://img.shields.io/pypi/status/apistar-mongoengine.svg?colorB=9f9f9f
    :target: https://github.com/njncalub/apistar-mongoengine/issues
 
-.. |pypi version| image:: https://img.shields.io/badge/version-0.0.6-blue.svg
+.. |pypi version| image:: https://img.shields.io/pypi/v/apistar-mongoengine.svg?colorB=1880c2
    :target: https://pypi.org/project/apistar-mongoengine
 
 .. |build status| image:: https://travis-ci.org/njncalub/apistar-mongoengine.svg?branch=master
-    :target: https://travis-ci.org/njncalub/apistar-mongoengine
+    :target: https://travis-ci.org/njncalub/apistar-mongoengine?branch=master
 
 .. |coverage| image:: https://coveralls.io/repos/github/njncalub/apistar-mongoengine/badge.svg?branch=master
    :target: https://coveralls.io/github/njncalub/apistar-mongoengine?branch=master
-
 
 Shameless bootleg copy of `flask-mongoengine <https://github.com/MongoEngine/flask-mongoengine/>`_ for `API Star <https://github.com/encode/apistar>`_, modified for personal taste. Contributions are most welcome!
 
