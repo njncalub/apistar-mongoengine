@@ -20,7 +20,4 @@ def get_post(post_id: str) -> PostType:
 
 
 def list_posts() -> List[PostType]:
-    return [
-        PostType(post)
-        for post in PostModel.objects.all()
-    ]
+    return [PostType(post) for post in PostModel.objects.all()]

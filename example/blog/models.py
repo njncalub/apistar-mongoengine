@@ -3,8 +3,6 @@ from mongoengine import StringField
 
 
 class PostModel(Document):
-    meta = {
-        'collection': 'posts',
-    }
+    meta = {"collection": "posts"}
 
     message = StringField(required=True)

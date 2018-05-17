@@ -20,11 +20,11 @@ def sconn_params():
     clear_connections_state()
 
     options = {
-        'host': WORKING_HOST,
-        'port': WORKING_PORT,
-        'name': WORKING_DB,
-        'alias': WORKING_ALIAS,
-        'serverSelectionTimeoutMS': SERVER_SELECTION_TIMEOUT_MS,
+        "host": WORKING_HOST,
+        "port": WORKING_PORT,
+        "name": WORKING_DB,
+        "alias": WORKING_ALIAS,
+        "serverSelectionTimeoutMS": SERVER_SELECTION_TIMEOUT_MS,
     }
     return MongoClientComponent(**options)
 
@@ -37,8 +37,8 @@ def sconn_host():
     clear_connections_state()
 
     options = {
-        'host': f'mongodb://{WORKING_HOST}:{WORKING_PORT}/{WORKING_DB}',
-        'serverSelectionTimeoutMS': SERVER_SELECTION_TIMEOUT_MS,
+        "host": f"mongodb://{WORKING_HOST}:{WORKING_PORT}/{WORKING_DB}",
+        "serverSelectionTimeoutMS": SERVER_SELECTION_TIMEOUT_MS,
     }
     return MongoClientComponent(**options)
 
@@ -51,8 +51,8 @@ def sconn_mockhost():
     clear_connections_state()
 
     options = {
-        'host': f'mongomock://{WORKING_HOST}:{WORKING_PORT}/{WORKING_DB}',
-        'serverSelectionTimeoutMS': SERVER_SELECTION_TIMEOUT_MS,
+        "host": f"mongomock://{WORKING_HOST}:{WORKING_PORT}/{WORKING_DB}",
+        "serverSelectionTimeoutMS": SERVER_SELECTION_TIMEOUT_MS,
     }
     return MongoClientComponent(**options)
 
@@ -65,9 +65,9 @@ def sconn_invalid_port():
     clear_connections_state()
 
     options = {
-        'host': WORKING_HOST,
-        'port': NON_WORKING_PORT,
-        'name': WORKING_DB,
-        'serverSelectionTimeoutMS': SERVER_SELECTION_TIMEOUT_MS,
+        "host": WORKING_HOST,
+        "port": NON_WORKING_PORT,
+        "name": WORKING_DB,
+        "serverSelectionTimeoutMS": SERVER_SELECTION_TIMEOUT_MS,
     }
     return MongoClientComponent(**options)

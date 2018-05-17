@@ -9,14 +9,14 @@ class Todo(Document):
 
 
 class TodoUsingAlias(Document):
-    meta = {'db_alias': 'alias'}
+    meta = {"db_alias": "alias"}
     title = StringField(max_length=60)
     text = StringField()
     done = BooleanField(default=False)
 
 
 class TodoUsingAnotherAlias(Document):
-    meta = {'db_alias': 'another_alias'}
+    meta = {"db_alias": "another_alias"}
     title = StringField(max_length=60)
     text = StringField()
     done = BooleanField(default=False)

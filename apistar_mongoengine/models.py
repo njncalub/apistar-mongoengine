@@ -2,11 +2,7 @@ import mongoengine
 from apistar import exceptions
 from apistar_mongoengine import types as as_me_types
 from mongoengine.errors import ValidationError
-from mongoengine.queryset import (
-    DoesNotExist,
-    MultipleObjectsReturned,
-    QuerySet,
-)
+from mongoengine.queryset import DoesNotExist, MultipleObjectsReturned, QuerySet
 
 from apistar_mongoengine.pagination import Pagination
 
@@ -50,7 +46,7 @@ class Document(mongoengine.Document):
     Abstract Document with extra helpers in the queryset class.
     """
 
-    meta = {'abstract': True, 'queryset_class': BaseQuerySet}
+    meta = {"abstract": True, "queryset_class": BaseQuerySet}
 
 
 class DynamicDocument(mongoengine.DynamicDocument):
@@ -58,7 +54,7 @@ class DynamicDocument(mongoengine.DynamicDocument):
     Abstract Dynamic Document with extra helpers in the queryset class.
     """
 
-    meta = {'abstract': True, 'queryset_class': BaseQuerySet}
+    meta = {"abstract": True, "queryset_class": BaseQuerySet}
 
 
 class EmbeddedDocument(mongoengine.EmbeddedDocument):
@@ -66,7 +62,7 @@ class EmbeddedDocument(mongoengine.EmbeddedDocument):
     Abstract Embedded Document with extra helpers in the queryset class.
     """
 
-    meta = {'abstract': True, 'queryset_class': BaseQuerySet}
+    meta = {"abstract": True, "queryset_class": BaseQuerySet}
 
 
 class DocumentType(as_me_types.Type):
