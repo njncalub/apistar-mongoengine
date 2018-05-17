@@ -4,6 +4,7 @@ from pymongo import MongoClient
 
 
 class MongoClientComponent(Component):
+
     def __init__(self, **kwargs) -> None:
         """
         Configure a new database backend.
@@ -30,19 +31,15 @@ class MongoClientComponent(Component):
             for pymongo's `MongoClient` for a full list.
         """
 
-        options = {
-            'alias': me_conn.DEFAULT_CONNECTION_NAME,
-            'db': None,
-            'name': None,
-        }
+        options = {"alias": me_conn.DEFAULT_CONNECTION_NAME, "db": None, "name": None}
         options.update(kwargs)
         self._settings = options.copy()
 
-        alias = options.pop('alias')
+        alias = options.pop("alias")
         # since me_conn.connect() uses `db` instead of `name`,
         # we have to remove it here manually.
-        db = options.pop('db')
-        name = options.pop('name')
+        db = options.pop("db")
+        name = options.pop("name")
 
         if not db and name:
             db = name
@@ -57,13 +54,13 @@ class MongoClientComponent(Component):
         if self._connection:
             return self._connection
 
-        alias = self._settings.get('alias')
+        alias = self._settings.get("alias")
         self._connection = me_conn.get_connection(alias=alias)
 
         return self._connection
 
     def disconnect(self) -> None:
-        alias = self._settings['alias']
+        alias = self._settings["alias"]
         me_conn.disconnect(alias=alias)
         self._connection = None
 
