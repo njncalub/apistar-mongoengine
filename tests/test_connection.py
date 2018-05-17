@@ -125,7 +125,12 @@ def test_basic_app(sconn_params):
     assert new_todo.status_code == 201
     assert (
         new_todo.json()
-        == {"id": HARDCODED_TODO_ID, "text": "Sample", "title": "Testing", "done": True}
+        == {
+            "id": HARDCODED_TODO_ID,
+            "text": "Sample",
+            "title": "Testing",
+            "done": True,
+        }
     )
 
     fetched_todo = client.get("/todo/")

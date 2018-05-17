@@ -31,7 +31,9 @@ class MongoClientComponent(Component):
             for pymongo's `MongoClient` for a full list.
         """
 
-        options = {"alias": me_conn.DEFAULT_CONNECTION_NAME, "db": None, "name": None}
+        options = {
+            "alias": me_conn.DEFAULT_CONNECTION_NAME, "db": None, "name": None
+        }
         options.update(kwargs)
         self._settings = options.copy()
 

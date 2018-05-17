@@ -74,7 +74,9 @@ def test_paginate(sconn_params):
     PAGINATION_PER_PAGE = 10
 
     for n in range(GENERATE_X_ITEMS):
-        create_todo_item(id=f"{n:024}", title=f"Item #{n}", text=f"Count to {n}")
+        create_todo_item(
+            id=f"{n:024}", title=f"Item #{n}", text=f"Count to {n}"
+        )
 
     current_page = PAGINATION_START_PAGE
     per_page = PAGINATION_PER_PAGE
@@ -140,7 +142,9 @@ def test_paginate_iter_pages_default_10_pages(sconn_params):
     PAGINATION_PER_PAGE = 1
 
     for n in range(GENERATE_X_ITEMS):
-        create_todo_item(id=f"{n:024}", title=f"Item #{n}", text=f"Count to {n}")
+        create_todo_item(
+            id=f"{n:024}", title=f"Item #{n}", text=f"Count to {n}"
+        )
 
     current_page = PAGINATION_START_PAGE
     per_page = PAGINATION_PER_PAGE
@@ -156,7 +160,9 @@ def test_paginate_iter_pages_default_10_pages(sconn_params):
     assert page_nums == [1, 2, 3, 4, 5, 6, None, 9, 10]
 
     page_nums = list(
-        paginated.iter_pages(left_edge=0, left_current=1, right_current=1, right_edge=0)
+        paginated.iter_pages(
+            left_edge=0, left_current=1, right_current=1, right_edge=0
+        )
     )
 
     assert page_nums == [1, 2, None]

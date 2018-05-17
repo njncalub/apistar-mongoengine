@@ -43,7 +43,7 @@ class Pagination(object):
         Returns a :class:`Pagination` object for the previous page.
         """
         assert self.iterable is not None, (
-            "an object is required " "for this method to work"
+            "an object is required for this method to work"
         )
         iterable = self.iterable
         if isinstance(iterable, QuerySet):
@@ -70,7 +70,7 @@ class Pagination(object):
         Returns a :class:`Pagination` object for the next page.
         """
         assert self.iterable is not None, (
-            "an object is required " "for this method to work"
+            "an object is required for this method to work"
         )
         iterable = self.iterable
         if isinstance(iterable, QuerySet):
@@ -92,7 +92,9 @@ class Pagination(object):
         """
         return self.page + 1
 
-    def iter_pages(self, left_edge=2, left_current=2, right_current=5, right_edge=2):
+    def iter_pages(
+        self, left_edge=2, left_current=2, right_current=5, right_edge=2
+    ):
         """
         Iterates over the page numbers in the pagination.  The four
         parameters control the thresholds how many numbers should be produced
@@ -121,7 +123,8 @@ class Pagination(object):
                 num <= left_edge
                 or num > self.pages - right_edge
                 or (
-                    num >= self.page - left_current and num <= self.page + right_current
+                    num >= self.page - left_current
+                    and num <= self.page + right_current
                 )
             ):
                 if last + 1 != num:
