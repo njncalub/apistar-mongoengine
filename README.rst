@@ -80,7 +80,7 @@ Running tests and getting the test coverage
 
 .. code:: bash
 
-    $ pipenv run pytest --cov-report html --cov apistar_mongoengine/ --verbose
+    $ pipenv run pytest --flake8 --cov-report html --cov apistar_mongoengine/ --verbose
 
 3. Open ``./htmlcov/index.html`` in your browser.
 
