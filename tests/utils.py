@@ -22,7 +22,7 @@ def force_connect(client):
     with warnings.catch_warnings():
         # Ignore warning that "ismaster" is always routed to primary even
         # if client's read preference isn't PRIMARY.
-        warnings.simplefilter('ignore', UserWarning)
-        client.admin.command('ismaster')  # Force connection.
+        warnings.simplefilter("ignore", UserWarning)
+        client.admin.command("ismaster")  # Force connection.
 
     return client

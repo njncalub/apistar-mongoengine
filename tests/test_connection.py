@@ -15,7 +15,7 @@ from tests.models import Todo
 
 def test_simple_connect_using_params(sconn_params):
     client = sconn_params.resolve()
-    response = client.admin.command('ismaster')
+    response = client.admin.command("ismaster")
 
     assert response
     assert isinstance(response, dict)
@@ -23,7 +23,7 @@ def test_simple_connect_using_params(sconn_params):
 
 def test_simple_connect_using_host_string(sconn_host):
     client = sconn_host.resolve()
-    response = client.admin.command('ismaster')
+    response = client.admin.command("ismaster")
 
     assert response
     assert isinstance(response, dict)
@@ -40,7 +40,7 @@ def test_simple_connect_using_invalid_port(sconn_invalid_port):
     client = sconn_invalid_port.resolve()
 
     with pytest.raises(ConnectionFailure):
-        client.admin.command('ismaster')
+        client.admin.command("ismaster")
 
 
 def test_disconnect_client(sconn_params):
@@ -55,8 +55,8 @@ def test_data_persists(sconn_params):
     Todo.drop_collection()
 
     todo = Todo()
-    todo.text = 'Sample'
-    todo.title = 'Testing'
+    todo.text = "Sample"
+    todo.title = "Testing"
     todo.done = True
 
     new_todo = todo.save()
@@ -69,23 +69,23 @@ def test_data_persists(sconn_params):
 
 
 def test_basic_app(sconn_params):
-    HARDCODED_TODO_ID = '1234567890abcdef12345678'
+    HARDCODED_TODO_ID = "1234567890abcdef12345678"
 
     Todo.drop_collection()
 
     def post_todo() -> http.JSONResponse:
         todo = Todo()
         todo.id = HARDCODED_TODO_ID
-        todo.text = 'Sample'
-        todo.title = 'Testing'
+        todo.text = "Sample"
+        todo.title = "Testing"
         todo.done = True
         new_todo = todo.save()
 
         data = {
-            'id': str(new_todo.id),
-            'text': new_todo.text,
-            'title': new_todo.title,
-            'done': new_todo.done,
+            "id": str(new_todo.id),
+            "text": new_todo.text,
+            "title": new_todo.title,
+            "done": new_todo.done,
         }
 
         return http.JSONResponse(data, status_code=201)
@@ -94,45 +94,41 @@ def test_basic_app(sconn_params):
         fetched_todo = Todo.objects().first()
 
         data = {
-            'id': str(fetched_todo.id),
-            'text': fetched_todo.text,
-            'title': fetched_todo.title,
-            'done': fetched_todo.done,
+            "id": str(fetched_todo.id),
+            "text": fetched_todo.text,
+            "title": fetched_todo.title,
+            "done": fetched_todo.done,
         }
 
         return data
 
     routes = [
-        Route(url='/todo/', method='POST', handler=post_todo),
-        Route(url='/todo/', method='GET', handler=get_todo),
+        Route(url="/todo/", method="POST", handler=post_todo),
+        Route(url="/todo/", method="GET", handler=get_todo),
     ]
 
     options = {
-        'host': WORKING_HOST,
-        'port': WORKING_PORT,
-        'name': WORKING_DB,
-        'alias': WORKING_ALIAS,
-        'serverSelectionTimeoutMS': SERVER_SELECTION_TIMEOUT_MS,
+        "host": WORKING_HOST,
+        "port": WORKING_PORT,
+        "name": WORKING_DB,
+        "alias": WORKING_ALIAS,
+        "serverSelectionTimeoutMS": SERVER_SELECTION_TIMEOUT_MS,
     }
 
-    components = [
-        MongoClientComponent(**options),
-    ]
+    components = [MongoClientComponent(**options)]
 
     app = App(routes=routes, components=components)
     client = TestClient(app)
 
-    new_todo = client.post('/todo/')
+    new_todo = client.post("/todo/")
 
     assert new_todo.status_code == 201
-    assert new_todo.json() == {
-        'id': HARDCODED_TODO_ID,
-        'text': 'Sample',
-        'title': 'Testing',
-        'done': True,
-    }
+    assert (
+        new_todo.json()
+        == {"id": HARDCODED_TODO_ID, "text": "Sample", "title": "Testing", "done": True}
+    )
 
-    fetched_todo = client.get('/todo/')
+    fetched_todo = client.get("/todo/")
 
     assert fetched_todo.status_code == 200
     assert fetched_todo.json() == new_todo.json()

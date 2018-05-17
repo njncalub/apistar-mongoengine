@@ -7,8 +7,8 @@ from apistar_mongoengine.pagination import Pagination
 from tests.models import Todo
 
 
-HARDCODED_TODO_ID = '1234567890abcdef12345678'
-NONEXISTENT_TODO_ID = '000000000000000000000000'
+HARDCODED_TODO_ID = "1234567890abcdef12345678"
+NONEXISTENT_TODO_ID = "000000000000000000000000"
 
 
 def drop_collections():
@@ -16,11 +16,7 @@ def drop_collections():
 
 
 def create_todo_item(**kwargs):
-    options = {
-        'text': 'Sample',
-        'title': 'Testing',
-        'done': True,
-    }
+    options = {"text": "Sample", "title": "Testing", "done": True}
     options.update(kwargs)
 
     todo = Todo(**options)
@@ -78,8 +74,7 @@ def test_paginate(sconn_params):
     PAGINATION_PER_PAGE = 10
 
     for n in range(GENERATE_X_ITEMS):
-        create_todo_item(id=f'{n:024}', title=f'Item #{n}',
-                         text=f'Count to {n}')
+        create_todo_item(id=f"{n:024}", title=f"Item #{n}", text=f"Count to {n}")
 
     current_page = PAGINATION_START_PAGE
     per_page = PAGINATION_PER_PAGE
@@ -102,9 +97,9 @@ def test_paginate(sconn_params):
     for i, item in enumerate(paginated.items):
         adjusted_id = i + (PAGINATION_PER_PAGE * (current_page - 1))
 
-        assert str(item.id) == f'{adjusted_id:024}'
-        assert item.title == f'Item #{adjusted_id}'
-        assert item.text == f'Count to {adjusted_id}'
+        assert str(item.id) == f"{adjusted_id:024}"
+        assert item.title == f"Item #{adjusted_id}"
+        assert item.text == f"Count to {adjusted_id}"
 
     paginated = paginated.next()
     current_page = paginated.page
@@ -112,9 +107,9 @@ def test_paginate(sconn_params):
     for i, item in enumerate(paginated.items):
         adjusted_id = i + (PAGINATION_PER_PAGE * (current_page - 1))
 
-        assert str(item.id) == f'{adjusted_id:024}'
-        assert item.title == f'Item #{adjusted_id}'
-        assert item.text == f'Count to {adjusted_id}'
+        assert str(item.id) == f"{adjusted_id:024}"
+        assert item.title == f"Item #{adjusted_id}"
+        assert item.text == f"Count to {adjusted_id}"
 
     paginated = paginated.prev()
     current_page = paginated.page
@@ -122,9 +117,9 @@ def test_paginate(sconn_params):
     for i, item in enumerate(paginated.items):
         adjusted_id = i + (PAGINATION_PER_PAGE * (current_page - 1))
 
-        assert str(item.id) == f'{adjusted_id:024}'
-        assert item.title == f'Item #{adjusted_id}'
-        assert item.text == f'Count to {adjusted_id}'
+        assert str(item.id) == f"{adjusted_id:024}"
+        assert item.title == f"Item #{adjusted_id}"
+        assert item.text == f"Count to {adjusted_id}"
 
 
 def test_pagination_create_from_blank_iterable(sconn_params):
@@ -145,8 +140,7 @@ def test_paginate_iter_pages_default_10_pages(sconn_params):
     PAGINATION_PER_PAGE = 1
 
     for n in range(GENERATE_X_ITEMS):
-        create_todo_item(id=f'{n:024}', title=f'Item #{n}',
-                         text=f'Count to {n}')
+        create_todo_item(id=f"{n:024}", title=f"Item #{n}", text=f"Count to {n}")
 
     current_page = PAGINATION_START_PAGE
     per_page = PAGINATION_PER_PAGE
@@ -161,7 +155,8 @@ def test_paginate_iter_pages_default_10_pages(sconn_params):
 
     assert page_nums == [1, 2, 3, 4, 5, 6, None, 9, 10]
 
-    page_nums = list(paginated.iter_pages(left_edge=0, left_current=1,
-                                          right_current=1, right_edge=0))
+    page_nums = list(
+        paginated.iter_pages(left_edge=0, left_current=1, right_current=1, right_edge=0)
+    )
 
     assert page_nums == [1, 2, None]
