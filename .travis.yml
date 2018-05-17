@@ -18,7 +18,7 @@ install:
   - pipenv install --dev -e .
 
 script:
-  - pipenv run pytest --cov apistar_mongoengine
+  - pipenv run pytest --flake8 --cov apistar_mongoengine
 
 after_success:
   - pipenv run coveralls
