@@ -153,6 +153,7 @@ def test_paginate_iter_pages_default_10_pages(sconn_params):
     total_pages = int(math.ceil(GENERATE_X_ITEMS / float(PAGINATION_PER_PAGE)))
 
     paginated = Todo.objects.paginate(page=current_page, per_page=per_page)
+    assert paginated.pages == total_pages
 
     page_nums = []
     for page_num in paginated.iter_pages():
