@@ -12,7 +12,7 @@ apistar-mongoengine
 .. |build status| image:: https://travis-ci.org/njncalub/apistar-mongoengine.svg?branch=master
     :target: https://travis-ci.org/njncalub/apistar-mongoengine?branch=master
 
-.. |coverage| image:: https://coveralls.io/repos/github/njncalub/apistar-mongoengine/badge.svg?branch=master
+.. |coverage| image:: https://img.shields.io/coveralls/github/njncalub/apistar-mongoengine/master.svg
    :target: https://coveralls.io/github/njncalub/apistar-mongoengine?branch=master
 
 Shameless bootleg copy of `flask-mongoengine <https://github.com/MongoEngine/flask-mongoengine/>`_ for `API Star <https://github.com/encode/apistar>`_, modified for personal taste. Contributions are most welcome!
